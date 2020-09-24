@@ -1,0 +1,20 @@
+#entryTypeNav {
+  margin-bottom: 15px;
+}
+.hide {
+  display: none;
+}
+
+pre {
+  background: #eee;
+  border: 1px solid #999;
+  padding: 5px 0;
+}
+
+pre strong {
+  color: blue;
+}
+
+h3{
+  font-size: 1.5rem;
+}
