@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>ReadMe | Team Balancing</title>
+    <meta name="description" content="ReadMe | Team Balancing">
+    <meta name="author" content="MK Carr">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h1>Team Balancing Program</h1>
+      <p>This program uses a heuristic algorithm to produce an approximation to what is basically a partition optimization problem.</p>
+
+      <h2>The Problem</h2>
+      <p>The problem that needs solving in this case is how to sort a number of players into teams of similar skill level. We can get a baseline estimate for how strong teams should be by finding the average value of all players in the pool. Creating teams of equal skill will not be exact, regardless of the method used. Ideally the teams will have an average player value that is close to the average of the group as a whole.</p>
+
+      <h2>Solution: The Greedy Algorithm</h2>
+      <p>To solve this problem, the program is written to follow the Greedy Algorithm. The greedy algorithm iterates through the numbers in descending order, assigning each of them to whichever subset has the smaller sum.</p>
+
+      <p><strong>Example:</strong></br>
+        <pre>
+        Players: (7,7,7,5,5,5,4,3,1,1) Average: 4.5
+        Team 1: (7,7,5,3,1) Sum: 23 Average: 4.6
+        Team 2: (7,5,5,4,1) Sum: 22 Average: 4.4</pre>
+      </p>
+
+      <h3>Optimization for More than 2 Teams</h3>
+      <p>When splitting a group into two teams, this solution does well. However, when the number of requested teams exceeds 2 there is a chance that the teams created will not be fully optimized. When this is the case, we'll need to check teams manually and possibly swap a few values to better optimize the outcome.</p>
+
+      <p><strong>Example:</strong></br>
+        <em>Solution from the Greedy Algorithm</em>
+        <pre>
+        Players: (11,10,8,8,7,7,7,7,7,6,5,5,5,4,4,3,3,2,1,1) Average: 5.55
+        Team 1: (11,7,5,3,3) Sum: 29 Average: 5.8
+        Team 2: (10,7,5,4,2) Sum: 28 Average: 5.6
+        Team 3: (8,7,7,4,1) Sum: 27 Average: 5.4
+        Team 4: (8,7,6,5,1) Sum: 27 Average: 5.4</pre>
+        <em>Optimized Solution</em>
+        <pre>
+        Players: (11,10,8,8,7,7,7,7,7,6,5,5,5,4,4,3,3,2,1,1) Average: 5.55
+        Team 1: (11,7,<strong>4</strong>,3,3) Sum: 28 Average: 5.6
+        Team 2: (10,7,5,4,2) Sum: 28 Average: 5.6
+        Team 3: (8,7,7,<strong>5</strong>,1) Sum: 28 Average: 5.6
+        Team 4: (8,7,6,5,1) Sum: 27 Average: 5.4</pre>
+      </p>
+      <p>To manually optimize teams, look at the team averages compared to the overall average. Ideally you want the team averages to be no more than .2 away from the overall average. Closer is better.</p>
+    </div>
+  </body>
+</html>

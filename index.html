@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Team Balancing</title>
+    <meta name="description" content="Team Balancing">
+    <meta name="author" content="MK Carr">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <section id="intro">
+        <h1>Valorant Team Balancer</h1>
+        <p><strong>To Begin:</strong> Upload a file of players or manually enter players to sort. If you are sorting players into more than 2 teams, you will need to manually check the results and possibly swap a few players in order to best optimize the teams.</p>
+        <p>For more information on how this sorter works please see the <a href="readme.html" title="Team Balancer README file" target="_blank">README</a>.</p>
+      </section>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          <form id="teamSortingForm">
+            <h2>Enter Players</h2>
+            <ul id="entryTypeNav" class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" href="#fileUpload">File Upload</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#manual">Manual Entry</a>
+              </li>
+            </ul>
+            <div id="fileUpload" class="form-group navShow">
+              <p><strong>Format:</strong> CSV files must have 2 columns, the first being Name and the second being Rank. Ranks must be in the format: <em>Rank #</em> (i.e Bronze 1 or Platinum 3)</p>
+              <hr>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="csvUpload" accept=".csv">
+                <label class="custom-file-label" for="csvUpload">Choose file</label>
+              </div>
+              <small id="csvHelp" class="form-text text-muted">This field only accepts .CSV files.</small>
+            </div>
+            <div id="manual" class="form-group hide">
+              <p>Please manually enter player names and ranks. 1 player per line. Ranks must be spelled out as <em>Rank #</em> (i.e Bronze 1 or Platinum 3).</p>
+              <p><strong>Example Entry:</strong> John Doe, Silver 2</p>
+              <hr>
+              <label for="input">Add CSV values</label>
+              <textarea id="input" class="form-control" rows="12"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="numTeams">Number of Teams to Create</label>
+              <input id="numTeams" type="text" class="form-control" value="2">
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="1" id="showPFF">
+              <label for="showPFF">Output <em>Playing for Fun</em> Discord Messages?</label>
+            </div>
+            <br>
+            <input id="run" type="button" class="btn btn-primary" value="Sort Teams">
+          </form>
+        </div>
+        <div class="col-md-6">
+          <section>
+            <h2>Results</h2>
+            <div class="form-group">
+              <textarea id="results" class="form-control" rows="12" disabled="disabled"></textarea>
+            </div>
+            <div id="pffMessages" class="hide">
+              <div class="form-group">
+                <label for="discord-message">Discord Reminder:</label>
+                <textarea id="discord-message" class="form-control" rows="12" disabled="disabled">Happy Thursday! Please react to this message by 3p PST to reserve your spot in the Playing for Fun game tonight at 6p PST!</textarea>
+              </div>
+              <div class="form-group">
+                <label for="discord-message">Discord Team Announcement:</label>
+                <textarea id="discord-teams" class="form-control" rows="12" disabled="disabled">Hi everyone! Here are your teams for tonight. GLHF! :D</textarea>
+              </div>
+              <div class="form-group">
+                <label for="discord-subs">Discord Substitute Reminder:</label>
+                <textarea id="discord-subs" class="form-control" rows="5" disabled="disabled">Hi girls, you're on the waitlist for the game tonight. Please react to this message by 3p PST if you're still available to be a sub for tonight's game. If anyone drops from the game we will contact you in the order that you filled out the form.</textarea>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <!-- jQuery CSV and Script files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.11/jquery.csv.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+      $('#run').bind('click', sortTeams);
+
+      $('#entryTypeNav li a').each(function(index){
+        $(this).click(changeEntryType);
+      });
+
+      // Add the following code if you want the name of the file appear on select
+      $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+    </script>
+  </body>
+</html>
