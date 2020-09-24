@@ -11,9 +11,9 @@ To solve this problem, the program is written to follow the Greedy Algorithm. Th
 
 | Group | Ranks | Sum | Average |
 | --- | --- | --- | --- |
-| Player Pool | (7,7,7,5,5,5,4,3,1,1) | Sum: | Average: 4.5 |
-| Team 1 | (7,7,5,3,1) | Sum:23 | Average: 4.6 |
-| Team 2 | (7,5,5,4,1) | Sum:22 | Average: 4.4 |
+| Player Pool | (7,7,7,5,5,5,4,3,1,1) | 45 | 4.5 |
+| Team 1 | (7,7,5,3,1) | 23 | 4.6 |
+| Team 2 | (7,5,5,4,1) | 22 | 4.4 |
 
 ### Optimization for More than 2 Teams
 When splitting a group into two teams, this solution does well. However, when the number of requested teams exceeds 2 there is a chance that the teams created will not be fully optimized. When this is the case, we'll need to check teams manually and possibly swap a few values to better optimize the outcome.
@@ -24,20 +24,20 @@ When splitting a group into two teams, this solution does well. However, when th
 
 | Group | Ranks | Sum | Average |
 | --- | --- | --- | --- |
-| Player Pool | (11,10,8,8,7,7,7,7,7,6,5,5,5,4,4,3,3,2,1,1) | Sum: | Average: 5.55 |
-| Team 1 | (11,7,5,3,3) | Sum:29 | Average: 5.8 |
-| Team 2 | (10,7,5,4,2) | Sum:28 | Average: 5.6 |
-| Team 1 | (8,7,7,4,1) | Sum:27 | Average: 5.4 |
-| Team 2 | (8,7,6,5,1) | Sum:27 | Average: 5.4 |
+| Player Pool | (11,10,8,8,7,7,7,7,7,6,5,5,5,4,4,3,3,2,1,1) | 111 | 5.55 |
+| Team 1 | (11,7,5,3,3) | 29 | 5.8 |
+| Team 2 | (10,7,5,4,2) | 28 | 5.6 |
+| Team 1 | (8,7,7,4,1) | 27 | 5.4 |
+| Team 2 | (8,7,6,5,1) | 27 | 5.4 |
 
 **Optimized Solution**
 
 | Group | Ranks | Sum | Average |
 | --- | --- | --- | --- |
-| Player Pool | (11,10,8,8,7,7,7,7,7,6,5,5,5,4,4,3,3,2,1,1) | Sum: | Average: 5.55 |
-| Team 1 | (11,7,**4**,3,3) | Sum:28 | Average: 5.6 |
-| Team 2 | (10,7,5,4,2) | Sum:28 | Average: 5.6 |
-| Team 1 | (8,7,7,**5**,1) | Sum:28 | Average: 5.6 |
-| Team 2 | (8,7,6,5,1) | Sum:27 | Average: 5.4 |
+| Player Pool | (11,10,8,8,7,7,7,7,7,6,5,5,5,4,4,3,3,2,1,1) | 111 | 5.55 |
+| Team 1 | (11,7,**4**,3,3) | 28 | 5.6 |
+| Team 2 | (10,7,5,4,2) | 28 | 5.6 |
+| Team 1 | (8,7,7,**5**,1) | 28 | 5.6 |
+| Team 2 | (8,7,6,5,1) | 27 | 5.4 |
 
 To manually optimize teams, look at the team averages compared to the overall average. Ideally you want the team averages to be no more than .2 away from the overall average. Closer is better.
