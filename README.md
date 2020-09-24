@@ -9,9 +9,9 @@ To solve this problem, the program is written to follow the Greedy Algorithm. Th
 
 *Example:*
 
-`Players: (7,7,7,5,5,5,4,3,1,1) Average: 4.5`
-`Team 1: (7,7,5,3,1) Sum: 23 Average: 4.6`
-`Team 2: (7,5,5,4,1) Sum: 22 Average: 4.4`
+`Players: (7,7,7,5,5,5,4,3,1,1) Average: 4.5  
+Team 1: (7,7,5,3,1) Sum: 23 Average: 4.6  
+Team 2: (7,5,5,4,1) Sum: 22 Average: 4.4`
 
 ### Optimization for More than 2 Teams
 When splitting a group into two teams, this solution does well. However, when the number of requested teams exceeds 2 there is a chance that the teams created will not be fully optimized. When this is the case, we'll need to check teams manually and possibly swap a few values to better optimize the outcome.
