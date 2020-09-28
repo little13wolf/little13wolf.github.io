@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Team Average Max Calculator</title>
+    <meta name="description" content="Team Average Max Calculator">
+    <meta name="author" content="MK Carr">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <section id="intro">
+        <h1>Valorant Team Average Max Calculator</h1>
+        <p>This program is intended to help you check your team's average player score to ensure you meet the division requirements for the Galorants NA League. Input your players' rank information and this will tell you the team score. If you have substitutes, enter their information as well to calculate your team's MAX and MIN scores.</p>
+        <p>If you have an incomplete team, this will tell you your team's current score foe the number of players entered.</p>
+        <p>Please Note: If you enter 3 main players and 2 substitutes, the program will treat the subs like your last 2 main players, so your "Main Team Score" will be off.</p>
+      </section>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          <form id="teamSortingForm">
+            <h2>Choose Your Division</h2>
+            <div class="form-group">
+              <label for="division">Division</label>
+              <select name="division" id="division">
+                <option value="learning">Learning Valorant (Iron-Silver)</option>
+                <option value="owning">Owning Valorant (Gold+)</option>
+              </select>
+            </div>
+            <h2>Choose Player Ranks</h2>
+            <div class="form-group">
+              <h3>Player 1</h3>
+              <table>
+                <tr>
+                  <th>Current Rank</th>
+                  <th>Act 2 Rank</th>
+                  <th>Act 3 Rank</th>
+                </tr>
+                <tr>
+                  <td>
+                    <select name="current" id="current1" class="form-control currentRank">
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="act2" id="act21" class="form-control act2">
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="act3" id="act31" class="form-control act3">
+                      <option value="na">Not Available</option>
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- End Player 1 -->
+            <!-- Start Player 2 -->
+            <div class="form-group">
+              <h3>Player 2</h3>
+              <table>
+                <tr>
+                  <th>Current Rank</th>
+                  <th>Act 2 Rank</th>
+                  <th>Act 3 Rank</th>
+                </tr>
+                <tr>
+                  <td>
+                    <select name="current" id="current2" class="form-control currentRank">
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="act2" id="act22" class="form-control act2">
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="act3" id="act32" class="form-control act3">
+                      <option value="na">Not Available</option>
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- End Player 2 -->
+            <!-- Start Player 3 -->
+            <div class="form-group">
+              <h3>Player 3</h3>
+              <table>
+                <tr>
+                  <th>Current Rank</th>
+                  <th>Act 2 Rank</th>
+                  <th>Act 3 Rank</th>
+                </tr>
+                <tr>
+                  <td>
+                    <select name="current" id="current3" class="form-control currentRank">
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="act2" id="act23" class="form-control act2">
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="act3" id="act33" class="form-control act3">
+                      <option value="na">Not Available</option>
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- End Player 3 -->
+            <!-- Start Player 4 -->
+            <div class="form-group">
+              <h3>Player 4</h3>
+              <table>
+                <tr>
+                  <th>Current Rank</th>
+                  <th>Act 2 Rank</th>
+                  <th>Act 3 Rank</th>
+                </tr>
+                <tr>
+                  <td>
+                    <select name="current" id="current4" class="form-control currentRank">
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="act2" id="act24" class="form-control act2">
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="act3" id="act34" class="form-control act3">
+                      <option value="na">Not Available</option>
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- End Player 4 -->
+            <!-- Start Player 5 -->
+            <div class="form-group">
+              <h3>Player 5</h3>
+              <table>
+                <tr>
+                  <th>Current Rank</th>
+                  <th>Act 2 Rank</th>
+                  <th>Act 3 Rank</th>
+                </tr>
+                <tr>
+                  <td>
+                    <select name="current" id="current5" class="form-control currentRank">
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="act2" id="act25" class="form-control act2">
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="act3" id="act35" class="form-control act3">
+                      <option value="na">Not Available</option>
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- End Player 5 -->
+            <!-- Start Player 6 -->
+            <div class="form-group">
+              <h3>Substitute 1</h3>
+              <table>
+                <tr>
+                  <th>Current Rank</th>
+                  <th>Act 2 Rank</th>
+                  <th>Act 3 Rank</th>
+                </tr>
+                <tr>
+                  <td>
+                    <select name="current" id="current6" class="form-control currentRank">
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="act2" id="act26" class="form-control act2">
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="act3" id="act36" class="form-control act3">
+                      <option value="na">Not Available</option>
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- End Player 6 -->
+            <!-- Start Player 7 -->
+            <div class="form-group">
+              <h3>Substitute 2</h3>
+              <table>
+                <tr>
+                  <th>Current Rank</th>
+                  <th>Act 2 Rank</th>
+                  <th>Act 3 Rank</th>
+                </tr>
+                <tr>
+                  <td>
+                    <select name="current" id="current7" class="form-control currentRank">
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="act2" id="act27" class="form-control act2">
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="act3" id="act37" class="form-control act3">
+                      <option value="na">Not Available</option>
+                      <option value="Unranked">Unranked</option>
+                      <option value="Iron 1">Iron 1</option>
+                      <option value="Iron 2">Iron 2</option>
+                      <option value="Iron 3">Iron 3</option>
+                      <option value="Bronze 1">Bronze 1</option>
+                      <option value="Bronze 2">Bronze 2</option>
+                      <option value="Bronze 3">Bronze 3</option>
+                      <option value="Silver 1">Silver 1</option>
+                      <option value="Silver 2">Silver 2</option>
+                      <option value="Silver 3">Silver 3</option>
+                      <option value="Gold 1">Gold 1</option>
+                      <option value="Gold 2">Gold 2</option>
+                      <option value="Gold 3">Gold 3</option>
+                      <option value="Platinum 1">Platinum 1</option>
+                      <option value="Platinum 2">Platinum 2</option>
+                      <option value="Platinum 3">Platinum 3</option>
+                      <option value="Diamond 1">Diamond 1</option>
+                      <option value="Diamond 2">Diamond 2</option>
+                      <option value="Diamond 3">Diamond 3</option>
+                      <option value="Immortal 1">Immortal 1</option>
+                      <option value="Immortal 2">Immortal 2</option>
+                      <option value="Immortal 3">Immortal 3</option>
+                      <option value="Radiant">Radiant</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- End Player 7 -->
+            <br>
+            <input id="run" type="button" class="btn btn-primary" value="Get TAM Score">
+          </form>
+        </div>
+        <div class="col-md-6">
+          <section>
+            <h2>Results</h2>
+            <div class="form-group">
+              <textarea id="results" class="form-control" rows="12" disabled="disabled"></textarea>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <!-- jQuery CSV and Script files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.11/jquery.csv.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+      $('#run').bind('click', rateTeam);
+    </script>
+  </body>
+</html>
