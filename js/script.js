@@ -3,6 +3,8 @@ var teams = [];
 var teamSums = [];
 var averages = [];
 var ranks = {
+  "na": 0,
+  "Unranked": 2,
   "Iron 1": 1,
   "Iron 2": 2,
   "Iron 3": 3,
@@ -26,6 +28,10 @@ var ranks = {
   "Immortal 3": 21,
   "Radiant": 22
 };
+var divisions = {
+  "learning": 5,
+  "owning": 13.5
+}
 
 function getGroupAverage(group) {
   var totalRank = 0;
@@ -169,4 +175,69 @@ function changeEntryType(event) {
   $(linkTarget).toggleClass('hide');
   $(sibTarget).toggleClass('hide');
 
+}
+
+function rateTeam() {
+  var div = divisions[$("select[name='division']").val()];
+  
+  var currentRanks = $("select[name='current']").map(function(){return $(this).val();}).get();
+  var act2Ranks = $("select[name='act2']").map(function(){return $(this).val();}).get();
+  var act3Ranks = $("select[name='act3']").map(function(){return $(this).val();}).get();
+
+  var team = getScores(currentRanks, act2Ranks, act3Ranks);
+  var mains = team.slice(0,5);
+  if (team.lenth > 5){
+    var substitutes = team.slice(-2);
+  }
+
+  var maxTAM = calculateTAM(team);
+  var minTAM = calculateTAM(team, "min");
+  var mainTAM = calculateTAM(mains);
+
+  var canPlay = "";
+  if (maxTAM <= div) {
+    canPlay = "Yes!";
+  } else if (maxTAM > div) {
+    canPlay = "No! You're team is too powerful for this division!";
+  }
+
+  var output = "Division: " + $("select[name='division']").val();
+  output += "\nCan this team play in that division? " + canPlay;
+  output += "\n\nMain Team Score: " + mainTAM + "\nTeam Max: " + maxTAM + "\nTeam Min: " + minTAM + "\n\n";
+  $("#results").val(output);
+
+}
+
+function getScores(current, act2, act3) {
+  var team = [];
+  for (i=0; i<current.length; i++) {
+    var cur = ranks[current[i]];
+    var a2 = ranks[act2[i]];
+    var a3 = ranks[act3[i]];
+
+    var average = (cur + a2)/2;
+
+    if (average > a3){
+      team[i] = average;
+    } else {
+      team[i] = a3
+    }
+
+  }
+  return team;
+}
+
+function calculateTAM(team, type="max"){
+  if (type == "max") {
+    team = team.sort(function(a, b){return b-a}).slice(0,5);
+  } else {
+    team = team.sort(function(a, b){return a-b}).slice(0,5);
+  }
+
+  var sum = 0;
+  for (i=0;i<team.length;i++) {
+    sum += team[i];
+  }
+
+  return sum / team.length;
 }
