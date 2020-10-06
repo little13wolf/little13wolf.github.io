@@ -182,9 +182,8 @@ function rateTeam() {
   
   var currentRanks = $("select[name='current']").map(function(){return $(this).val();}).get();
   var act2Ranks = $("select[name='act2']").map(function(){return $(this).val();}).get();
-  var act3Ranks = $("select[name='act3']").map(function(){return $(this).val();}).get();
 
-  var team = getScores(currentRanks, act2Ranks, act3Ranks);
+  var team = getScores(currentRanks, act2Ranks);
   var mains = team.slice(0,5);
   if (team.lenth > 5){
     var substitutes = team.slice(-2);
@@ -208,12 +207,11 @@ function rateTeam() {
 
 }
 
-function getScores(current, act2, act3) {
+function getScores(current, act2) {
   var team = [];
   for (i=0; i<current.length; i++) {
     var cur = ranks[current[i]];
     var a2 = ranks[act2[i]];
-    var a3 = ranks[act3[i]];
 
     var average = (cur + a2)/2;
 
