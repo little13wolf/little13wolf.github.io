@@ -214,13 +214,8 @@ function getScores(current, act2) {
     var a2 = ranks[act2[i]];
 
     var average = (cur + a2)/2;
-
-    if (average > a3){
-      team[i] = average;
-    } else {
-      team[i] = a3
-    }
-
+    
+    team[i] = average;
   }
   return team;
 }
